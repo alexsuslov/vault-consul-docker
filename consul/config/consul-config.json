@@ -1,4 +1,7 @@
 {
+  "acl": "enable",
+  "default_policy":"deny",
+  "enable_token_persistence":true,
   "datacenter": "localhost",
   "data_dir": "/consul/data",
   "log_level": "DEBUG",
