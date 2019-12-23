@@ -24,7 +24,7 @@ ENV PATH="PATH=$PATH:$PWD/consul"
 
 # add the config file
 COPY ./config/consul-config.json /consul/config/config.json
-
+COPY ./config/agent.hcl /consul/config/agent.hcl
 # expose ports
 EXPOSE 8300 8400 8500 8600
 
