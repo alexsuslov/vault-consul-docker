@@ -1,13 +1,21 @@
 version: '3.6'
-
+networks:
+  web:
+    external: true
 services:
 
+  ############
+  # VAULT
+  # :8200
+  ############  
   vault:
     build:
       context: ./vault
       dockerfile: Dockerfile
     ports:
       - 8200:8200
+    networks:
+      - web      
     volumes:
       - ./vault/config:/vault/config
       - ./vault/policies:/vault/policies
@@ -21,17 +29,26 @@ services:
     depends_on:
       - consul
 
+  ############
+  # CONSUL
+  # :8500
+  ############ 
   consul:
     build:
       context: ./consul
       dockerfile: Dockerfile
     ports:
       - 8500:8500
+    networks:
+      - web
     command: agent -server -bind 0.0.0.0 -client 0.0.0.0 -bootstrap-expect 1 -config-file=/consul/config/config.json
     volumes:
       - ./consul/config/consul-config.json:/consul/config/config.json
       - ./consul/data:/consul/data
 
+  ############
+  # CONSUL-WORKER
+  ############ 
   consul-worker:
     build:
       context: ./consul
@@ -41,3 +58,22 @@ services:
       - ./consul/config/consul-config.json:/consul/config/config.json
     depends_on:
       - consul
+
+  ############
+  # Traefik
+  # :80; :443
+  ############
+  traefik:
+    image: traefik:<stable v1.7 from https://hub.docker.com/_/traefik>
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - web
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./traefik/traefik.toml:/traefik.toml
+      - ./traefik/acme.json:/acme.json
+    container_name: traefik
+    
