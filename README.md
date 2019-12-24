@@ -1,26 +1,26 @@
 # Managing Secrets
 ## Consul
 
-Start consul
+### Start consul
 ```
 docker-compose up -d --build consul consul-worker
 ```
-create secret id
-
-docker-compose exec consul consul acl bootstrap
+### Secret id
 
 ```
+docker-compose exec consul consul acl bootstrap
 ...
 AccessorID:       XXXXXXX
 SecretID:         XXXXXXX
 ...
 ```
 
-### Create policy for vault
+### Policy for vault
 
 From https://www.vaultproject.io/docs/configuration/storage/consul.html#ACLs
 
 name: vault
+
 ```
 {
   "key_prefix": {
@@ -54,11 +54,18 @@ name: vault
 
 ### create token
 
+
 ### add token to vault config
 ```
+
 ```
 # Vault
 
+## Start vault
+```
+docker-compose u -d vault
+```
+## 
 
 
 ## Want to learn how to build this?
