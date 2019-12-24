@@ -10,13 +10,10 @@ create secret id
 docker-compose exec consul consul acl bootstrap
 
 ```
-AccessorID:       cb86e406-553b-8c65-3de0-e30f1a90a4e1
-SecretID:         c1b1143b-744e-cab2-5f04-d9f514a5fc43
-Description:      Bootstrap Token (Global Management)
-Local:            false
-Create Time:      2019-12-23 14:29:11.868595878 +0000 UTC
-Policies:
-   00000000-0000-0000-0000-000000000001 - global-management
+...
+AccessorID:       XXXXXXX
+SecretID:         XXXXXXX
+...
 ```
 
 ### Create policy for vault
@@ -58,9 +55,8 @@ name: vault
 ### create token
 
 ### add token to vault config
-
-
-
+```
+```
 # Vault
 
 
