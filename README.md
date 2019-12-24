@@ -1,4 +1,8 @@
 # Managing Secrets
+## network web
+```
+docker network create web
+```
 ## Consul
 
 ### Start consul
@@ -66,6 +70,7 @@ name: vault
 docker-compose u -d vault
 ```
 ## 
+
 
 
 ## Want to learn how to build this?
